@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<head>
+    <title>Europa League</title>
+    <meta charset="UTF-8">
+    <style>
+     #Affichage{
+        display:grid;
+        grid-template-columns: repeat(4,1fr);
+        grid-template-areas: "Ouest Nord Est Sud";
+        background-color:rgb(68, 124, 184);
+        border: 1px solid black;
+        }
+    #Affichage > div{
+        border: 2px solid black;
+        }
+     #O{
+       grid-area: Ouest;
+
+     }
+     #N{
+       grid-area: Nord;
+     }
+     #E{
+       grid-area: Est;
+     }
+     #S{
+       grid-area: Sud;
+     }
+     
+    </style>
+</head>
+<body>
+<h1 id="Europe">Europe</h1>
+<div id="Affichage"></div>
+</body>
+<script>
+    const Europe = [
+    { nom: "Allemagne", zone: "O", population: 83 },
+    { nom: "Belgique", zone: "O", population: 2 },
+    { nom: "Autriche", zone: "O", population: 20 },
+    { nom: "Bulgarie", zone: "E", population: 1 },
+    { nom: "Chypre", zone: "S", population: 1 },
+    { nom: "Croatie", zone: "S", population: 2 },
+    { nom: "Danemark", zone: "N", population: 12 },
+    { nom: "Espagne", zone: "S", population: 22 },
+    { nom: "Estonie", zone: "N", population: 2 },
+    { nom: "Finlande", zone: "N", population: 3 },
+    { nom: "France", zone: "O", population: 67 },
+    { nom: "Grèce", zone: "S", population: 2 },
+    { nom: "Hongrie", zone: "E", population: 18 },
+    { nom: "Irlande", zone: "N", population: 35 },
+    { nom: "Italie", zone: "S", population: 55 },
+    { nom: "Lettonie", zone: "N", population: 4 },
+    { nom: "Lituanie", zone: "N", population: 5 },
+    { nom: "Luxembourg", zone: "O", population: 23 },
+    { nom: "Malte", zone: "S", population: 1 },
+    { nom: "Pays-Bas", zone: "O", population: 33 },
+    { nom: "Pologne", zone: "E", population: 45 },
+    { nom: "Portugal", zone: "S", population: 34 },
+    { nom: "Tchéquie", zone: "E", population: 5 },
+    { nom: "Roumanie", zone: "E", population: 6 },
+    { nom: "Slovaquie", zone: "E", population: 22 },
+    { nom: "Slovénie", zone: "E", population: 6 },
+    { nom: "Suède", zone: "N", population: 31 }
+];
+
+let zones = Europe.reduce( (liste,x) => {
+  if( !(liste[x.zone]) ) liste[x.zone]=x
+  if( liste[x.zone].population < x.population ) 
+  liste[x.zone] = x;
+  return liste } , {} );
+
+let d = document.getElementById("Affichage");
+for(let [zone, pays] of Object.entries(zones)){
+    let div = "<div id="+zone+" > <h2> Zone : "+zone+" </h2> <p>Le pays le plus peuplé : "+pays.nom+" nombre de personnes : "+pays.population+" </p> </div>";
+    d.insertAdjacentHTML("beforeend",div);
+
+}
+</script>
